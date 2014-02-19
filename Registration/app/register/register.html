@@ -1,0 +1,89 @@
+﻿<div class="row" data-ng-controller="register as vm">
+    <div class="col-sm-12">
+        <div class="row">
+            <div class="col-sm-12">
+                <h2>{{vm.title}}</h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+
+                <form class="form-horizontal" role="form">
+                    <div class="form-group">
+                        <label for="username" class="col-sm-2 control-label">Username</label>
+                        <div class="col-sm-10">
+                            <input class="form-control" required id="username" data-ui-minlength="6" data-ui-maxlength="12" data-ng-model="vm.account.username" placeholder="Username">
+                            <span class="help-block">This is the account name you'll use to login with.</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="email" class="col-sm-2 control-label">Email address</label>
+                        <div class="col-sm-10">
+                            <input class="form-control" id="email" name="emailAddress" required type="email" ng-model="vm.account.emailAddress" placeholder="Email address">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-10 col-sm-offset-2">
+                            <input class="form-control" name="emailConfim" id="emailConfirm" data-ui-validate-equals="vm.account.emailAddress" data-ui-validate-equals-error="Email Addresses Must Match" required ng-model="vm.account.emailAddressConfirm" placeholder="Confirm Email address">
+                            <span class="help-block">Please confirm your email address</span>
+                            <span id="myError"></span>
+                        </div>
+
+                    </div>
+                    <div data-ng-if="!vm.account.isAuthenticated">
+                        <div class="form-group">
+                            <label for="password" class="col-sm-2 control-label">Password</label>
+                            <div class="col-sm-10">
+                                <input class="form-control" type="password" required id="password" data-ui-minlength="6" data-ui-maxlength="12" data-ng-model="vm.account.password" placeholder="Password">
+                                <span class="help-block">Please enter a password</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-10 col-sm-offset-2">
+                                <input class="form-control" id="passwordConfirm" required type="password" data-ui-minlength="6" data-ui-maxlength="12" data-ui-validate-equals="vm.account.password" data-ui-validate-equals-error="Passwords Must Match" data-ng-model="vm.account.passwordConfirm" placeholder="Confirm Password">
+                                <span class="help-block">Please confirm password</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div data-ng-if="vm.account.isAuthenticated">
+                        <div class="form-group">
+                            <label for="currentPassword" class="col-sm-2 control-label">Password</label>
+                            <div class="col-sm-10">
+                                <input class="form-control" type="password" required id="currentPassword" data-ng-model="vm.account.currentPassword" placeholder="Password">
+                                <span class="help-block">Please enter your current password</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-10 col-sm-offset-2">
+                                <input class="form-control" id="newPassword" required type="password" data-ng-model="vm.account.password" placeholder="New Password">
+                                <span class="help-block">Please enter your new password</span>
+
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-10 col-sm-offset-2">
+                                <input class="form-control" id="newPasswordConfirm" required data-ng-model="vm.account.passwordConfirm" type="password" placeholder="Confirm New Password">
+                                <span class="help-block">Please confirm your new password</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="deactivate" class="col-sm-2 control-label">Deactivate Account</label>
+                            <div class="col-sm-10">
+                                <button class="btn" id="deactivate"><span class="glyphicon glyphicon-remove"></span><span class="c-divider-sm"></span>Deactivate Account</button>
+                                <span class="help-block">Are you sure you want to deactivate your Disqus account? This cannot be reversed!</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-sm-12">
+                            <button class="btn pull-right" id="saveaccount" data-ng-click="vm.save()"><span class="glyphicon glyphicon-ok"></span><span class="c-divider-sm"></span>Save Changes</button>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+</div>
