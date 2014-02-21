@@ -2,29 +2,26 @@
     'use strict';
 
     // Controller name is handy for logging
-    var controllerId = 'register';
+    var controllerId = 'secure';
 
     // Define the controller on the module.
     // Inject the dependencies. 
     // Point to the controller definition function.
     angular.module('app').controller(controllerId,
-        ['$scope','datacontext','common','config', register]);
+        ['$scope','common', secure]);
 
-    function register($scope,datacontext,common,config) {
+    function secure($scope,common) {
         // Using 'Controller As' syntax, so we assign this to the vm variable (for viewmodel).
         var vm = this;
 
         // Bindable properties and functions are placed on vm.
         vm.activate = activate;
-        vm.title = 'register';
-        vm.save = save;
+        vm.title = 'secure';
+        activate();
         function activate() {
+            common.activateController([], controllerId);
         }
-        function save() {
-            datacontext.register(vm).catch(function (response) {
-                common.$broadcast(config.events.showErrors, { show: true, errors: [response] });
-            });
-        }
+
         //#region Internal Methods        
 
         //#endregion

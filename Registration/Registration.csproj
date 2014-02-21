@@ -40,7 +40,35 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.6.0.2\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\packages\EntityFramework.6.0.2\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Owin">
+      <HintPath>..\packages\Microsoft.Owin.2.1.0\lib\net45\Microsoft.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Host.SystemWeb">
+      <HintPath>..\packages\Microsoft.Owin.Host.SystemWeb.2.1.0\lib\net45\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Hosting">
+      <HintPath>..\packages\Microsoft.Owin.Hosting.2.1.0\lib\net45\Microsoft.Owin.Hosting.dll</HintPath>
+    </Reference>
+    <Reference Include="Nancy">
+      <HintPath>..\packages\Nancy.0.22.2\lib\net40\Nancy.dll</HintPath>
+    </Reference>
+    <Reference Include="Nancy.Owin">
+      <HintPath>..\packages\Nancy.Owin.0.22.2\lib\net40\Nancy.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Newtonsoft.Json.6.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Owin">
+      <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -69,12 +97,23 @@
   <ItemGroup>
     <Content Include="app\app.js" />
     <Content Include="app\common\common.js" />
+    <Content Include="app\common\logger.js" />
+    <Content Include="app\config.exceptionHandler.js" />
     <Content Include="app\config.js" />
+    <Content Include="app\home\home.html" />
+    <Content Include="app\home\home.js" />
     <Content Include="app\layout\shell.html" />
     <Content Include="app\layout\shell.js" />
     <Content Include="app\config.routes.js" />
+    <Content Include="app\login\login.html" />
+    <Content Include="app\login\login.js" />
     <Content Include="app\register\register.html" />
     <Content Include="app\register\register.js" />
+    <Content Include="app\secure\secure.html" />
+    <Content Include="app\secure\secure.js" />
+    <Content Include="app\services\datacontext.js" />
+    <Content Include="app\services\model.js" />
+    <Content Include="app\services\model.mapper.js" />
     <Content Include="Content\bootstrap\bootstrap.css">
       <DependentUpon>bootstrap.less</DependentUpon>
     </Content>
@@ -420,10 +459,32 @@
     <Content Include="Scripts\toastr.min.js.map" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Bootstrapper.cs" />
+    <Compile Include="Extensions\NancyExtensions.cs" />
+    <Compile Include="Infrastructure\UserIdentity.cs" />
+    <Compile Include="Models\AccountViewModel.cs" />
+    <Compile Include="Modules\AccountModule.cs" />
+    <Compile Include="Modules\HomeModule.cs" />
+    <Compile Include="Modules\IAccountModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="app\services\" />
+    <Folder Include="App_Data\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Registration.Core\Registration.Core.csproj">
+      <Project>{8638ed99-7cb1-4aa7-bbac-92f699f55ab8}</Project>
+      <Name>Registration.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Registration.Data\Registration.Data.csproj">
+      <Project>{ca4d923d-2e94-443e-bbf5-e1a4486606c7}</Project>
+      <Name>Registration.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Registration.Services\Registration.Services.csproj">
+      <Project>{90c8f980-8d46-45bf-990a-9bb64f96825a}</Project>
+      <Name>Registration.Services</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

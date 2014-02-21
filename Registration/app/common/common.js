@@ -10,26 +10,66 @@ this will also share the configuraion with the rest of the application
     var id = 'common';
 
     // Create the module
-    var commonModule = angular.module(id, []);
-    commonModule.factory(id, ['$rootScope','config','routes',common]);
-    function common($rootScope, config,routes) {
+    var commonModule = angular.module('common', []);
+    commonModule.provider('commonConfig', function () {
+        this.config = {
+
+            // These are the properties we need to set
+            //controllerActivateSuccessEvent: '',
+            //spinnerToggleEvent: ''
+        };
+
+        this.$get = function () {
+            return {
+                config: this.config
+            };
+        };
+    });
+    commonModule.factory('common', ['$rootScope','$q', 'commonConfig', 'logger','routes', common]);
+    function common($rootScope, $q,commonConfig, logger, routes) {
         function $broadcast() {
             return $rootScope.$broadcast.apply($rootScope, arguments);
         }
-        //provide way for controllers to get named routes
+
+        //provide way for controllers to get named rroutes as views returning templateUrl
         function getView(path) {
-            return _.find(routes, function (item) { return item.url == path }).config.templateUrl;
+            return _.find(routes, function (item) { return item.url == path; }).config.templateUrl;
+        }
+        //provide a way to get a route that is not a view
+        function getRoute(path) {
+            try {
+                return _.find(routes, function (item) { return item.url == path; }).url;
+            } catch (e) {
+                throw ("Path" + path + " Could not be found. Did you forget to configure the route in config.routes.js?");
+            }
+        }
+        //common way of raising errors so they can be handled in a single place
+        function raiseError(message, cause) {
+            throw ({message:message,cause:cause});
+        }
+        function activateController(promises, controllerId) {
+            return $q.all(promises).then(function (eventArgs) {
+                var data = { controllerId: controllerId };
+                $broadcast(commonConfig.config.controllerActivateSuccessEvent, data);
+            });
         }
         //expose common libraries, functions, declarations, etc to our application
         return {
             $_: _,
             $broadcast: $broadcast,
-            config: config,
+            activateController: activateController,
+            logger:logger,
             routes: {
-                register:'/register'
+                home: '/',
+                register: '/register',
+                account: '/account',
+                login: '/login',
+                secure:'/secure'
             },
-            getView:getView
-
+            getView: getView,
+            getRoute: getRoute,
+            raiseError:raiseError
+     
         };
     }
 

@@ -1,23 +1,35 @@
-﻿/*purpose:
-    we need a place where we can configure everything that is application in scope
-    this will be a value provider for easy access accross the application
-
+﻿/*
+purpose: allows for a centralized place to set configuration options that are applicable
+to the application as a whole. Logging, toastr settings, events, etc
 */
 (function () {
     'use strict';
-
-    // Module name is handy for logging
     var id = 'config';
     var app = angular.module('app');
-    
-    //this gets returned to our value provider
-    var config = {
-        events: {},
-        routes: {
-            register:'/register'
-        }
 
+
+    var events = {
+        showErrors: 'showErrors',
+        showView:'showView'
     };
-    //value provider
+    var config = {
+        events: events,
+        appErrorPrefix: '[Application Error] - ',
+        controllerActivateSuccess: 'controllerActivateSuccess'
+    };
+
     app.value(id, config);
+
+    app.config(['$logProvider', function ($logProvider) {
+        // turn debugging off/on (no info or warn)
+        if ($logProvider.debugEnabled) {
+            $logProvider.debugEnabled(true);
+        }
+    }]);
+
+    app.config(['commonConfigProvider', function (cfg) {
+        cfg.config.controllerActivateSuccessEvent = config.events.controllerActivateSuccess;
+        //cfg.config.spinnerToggleEvent = config.events.spinnerToggle;
+    }]);
+
 })();

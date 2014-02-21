@@ -15,17 +15,55 @@
     };
     function getRoutes() {
         return [
-        {
-            url: '/register',
-            config: {
-                templateUrl: 'app/register/register.html',
-                title: 'register',
-                controller: 'register'
+                {
+                    url: '/',
+                    config: {
+                        templateUrl: 'app/home/home.html',
+                        title: 'home',
+                        controller: 'home'
 
-            }
-        }
+                    }
+                },
+                {
 
-        ]
+                    url: '/register',
+                    config: {
+                        templateUrl: 'app/register/register.html',
+                        title: 'register',
+                        controller: 'register'
+
+                    }
+                },
+                {
+
+                    url: '/login',
+                    config: {
+                        templateUrl: 'app/login/login.html',
+                        title: 'login',
+                        controller: 'login'
+
+                    }
+                },
+                {
+
+                    url: '/account',
+                    config: {
+                        title: 'account',
+                        controller: 'account'
+
+                    }
+                },
+           {
+
+               url: '/secure',
+               config: {
+                   title: 'secure',
+                   templateUrl: 'app/secure/secure.html',
+                   controller: 'secure'
+
+               }
+           }
+        ];
     };
 
 })();

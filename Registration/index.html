@@ -12,26 +12,34 @@
     <link href="/Content/bootstrap/bootstrap.css" rel="stylesheet">
     <link href="Content/toastr.css" rel="stylesheet" />
 </head>
-<body>
-    <div data-ng-include="'app/layout/shell.html'"></div>
-    <!--vendor-->
-    <script src="Scripts/jquery-1.10.2.min.js"></script>
-    <script src="Scripts/bootstrap.min.js"></script>
-    <script src="Scripts/lodash.min.js"></script>
-    <script src="Scripts/toastr.min.js"></script>
-    <script src="Scripts/spin.min.js"></script>
+    <body>
+        
+        <div data-ng-include="'app/layout/shell.html'"></div>
+        <!--vendor-->
+        <script src="Scripts/jquery-1.10.2.min.js"></script>
+        <script src="Scripts/bootstrap.min.js"></script>
+        <script src="Scripts/lodash.min.js"></script>
+        <script src="Scripts/toastr.min.js"></script>
+        <script src="Scripts/spin.min.js"></script>
    
-    <script src="Scripts/angular.min.js"></script>
-    <script src="Scripts/angular-animate.min.js"></script>
-    <script src="Scripts/angular-route.min.js"></script>
+        <script src="Scripts/angular.js"></script>
+        <script src="Scripts/angular-animate.min.js"></script>
+        <script src="Scripts/angular-route.min.js"></script>
 
-    <!--application-->
-    <script src="app/app.js"></script>
-    <script src="app/config.routes.js"></script>
-    <script src="app/layout/shell.js"></script>
-    <script src="app/register/register.js"></script>
-    <script src="app/config.js"></script>
-    <script src="app/common/common.js"></script>
-    
-</body>
+        <!--application-->
+        <script src="app/app.js"></script>
+        <script src="app/config.js"></script>
+        <script src="app/common/common.js"></script>
+        <script src="app/config.routes.js"></script>
+        <script src="app/layout/shell.js"></script>
+        <script src="app/login/login.js"></script>
+        <script src="app/register/register.js"></script>
+        <script src="app/config.exceptionHandler.js"></script>
+        <script src="app/common/logger.js"></script>
+        <script src="app/home/home.js"></script>
+        <script src="app/services/datacontext.js"></script>
+        <script src="app/services/model.js"></script>
+        <script src="app/services/model.mapper.js"></script>
+        <script src="app/secure/secure.js"></script>
+    </body>
 </html>
