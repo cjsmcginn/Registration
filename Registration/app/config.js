@@ -10,12 +10,14 @@ to the application as a whole. Logging, toastr settings, events, etc
 
     var events = {
         showErrors: 'showErrors',
-        showView:'showView'
+        showView: 'showView',
+        controllerActivateSuccess: 'controllerActivateSuccess',
+        spinnerToggle: 'spinnerToggle'
     };
     var config = {
         events: events,
-        appErrorPrefix: '[Application Error] - ',
-        controllerActivateSuccess: 'controllerActivateSuccess'
+        appErrorPrefix: '[Application Error] - '
+
     };
 
     app.value(id, config);
@@ -29,7 +31,6 @@ to the application as a whole. Logging, toastr settings, events, etc
 
     app.config(['commonConfigProvider', function (cfg) {
         cfg.config.controllerActivateSuccessEvent = config.events.controllerActivateSuccess;
-        //cfg.config.spinnerToggleEvent = config.events.spinnerToggle;
     }]);
 
 })();

@@ -8,13 +8,26 @@
     // Inject the dependencies. 
     // Point to the controller definition function.
     angular.module('app').controller(controllerId,
-        ['$scope','$http','common','config',shell]);
+        ['$rootScope','$http','common','config',shell]);
 
-    function shell($scope, $http, common, config) {
+    function shell($rootScope, $http, common, config) {
         var events = config.events;
+       
         var logSuccess = common.logger.getLogFn(controllerId, 'success');
         // Using 'Controller As' syntax, so we assign this to the vm variable (for viewmodel).
         var vm = this;
+        //vm.spinnerOptions = {
+        //    radius: 40,
+        //    lines: 7,
+        //    length: 0,
+        //    width: 30,
+        //    speed: 1.7,
+        //    corners: 1.0,
+        //    trail: 100,
+        //    color: '#F58A00'
+
+
+        //};
         vm.currentView = common.getView(common.routes.home);
    
        
@@ -22,7 +35,13 @@
         vm.activate = activate;
         vm.title = 'shell';
         vm.closeErrors = closeErrors;
-        function showErrors(on) { vm.showErrors = on; }
+        function toggleSpinner(on) {
+             vm.isBusy = on;
+        }
+
+        function showErrors(on) {
+             vm.showErrors = on;
+        }
         function closeErrors() {
             common.$broadcast(events.showErrors, { show: false, errors: null });
         };
@@ -33,21 +52,21 @@
         function activate() {
         }
 
-        function viewLoad() {
-            console.log('loaded again')
-        }
-
-        $scope.$on(events.showView, function (data, args) {
+        $rootScope.$on(events.spinnerToggle,
+            function (data, args) {
+                toggleSpinner(args.show);
+            }
+        );
+        $rootScope.$on(events.showView, function (data, args) {
             showView(args.view);
         });
-        $scope.$on(events.showErrors, function (data, args) {
+        $rootScope.$on(events.showErrors, function (data, args) {
             vm.errors = args.errors;
             showErrors(args.show);
         });
-        $scope.$on(events.controllerActivateSuccess,
+        $rootScope.$on(events.controllerActivateSuccess,
          function (data, args) {
              logSuccess('Loaded ' + args.controllerId, null, true);
-
          });
     }
 })();

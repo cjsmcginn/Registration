@@ -55,14 +55,23 @@
                 },
            {
 
-               url: '/secure',
+               url: '/profile',
                config: {
-                   title: 'secure',
-                   templateUrl: 'app/secure/secure.html',
-                   controller: 'secure'
+                   title: 'profile',
+                   templateUrl: 'app/profile/profile.html',
+                   controller: 'profile'
 
                }
-           }
+           },
+            {
+
+                url: '/states',
+                config: {
+                    title: 'states',
+                    controller: 'profile'
+
+                }
+            }
         ];
     };
 

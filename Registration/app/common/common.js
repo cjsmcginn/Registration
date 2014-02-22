@@ -28,6 +28,9 @@ this will also share the configuraion with the rest of the application
     commonModule.factory('common', ['$rootScope','$q', 'commonConfig', 'logger','routes', common]);
     function common($rootScope, $q,commonConfig, logger, routes) {
         function $broadcast() {
+            //we dont want to broadcast events that are not defined
+            if (!arguments || !arguments[0])
+                logger.logWarning("An attempt to broadcast an undefeined evenrt was made",null,null,true);
             return $rootScope.$broadcast.apply($rootScope, arguments);
         }
 
@@ -64,7 +67,8 @@ this will also share the configuraion with the rest of the application
                 register: '/register',
                 account: '/account',
                 login: '/login',
-                secure:'/secure'
+                profile: '/profile',
+                states:'/states'
             },
             getView: getView,
             getRoute: getRoute,
