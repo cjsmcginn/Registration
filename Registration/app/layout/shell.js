@@ -1,12 +1,8 @@
-﻿(function () {
+﻿/*purpose: serve as container for the application to centralize ui interaction and behavior
+listens for events, provides common layout*/
+(function () {
     'use strict';
-
-    // Controller name is handy for logging
     var controllerId = 'shell';
-
-    // Define the controller on the module.
-    // Inject the dependencies. 
-    // Point to the controller definition function.
     angular.module('app').controller(controllerId,
         ['$rootScope','$http','common','config',shell]);
 
@@ -14,59 +10,61 @@
         var events = config.events;
        
         var logSuccess = common.logger.getLogFn(controllerId, 'success');
-        // Using 'Controller As' syntax, so we assign this to the vm variable (for viewmodel).
         var vm = this;
-        //vm.spinnerOptions = {
-        //    radius: 40,
-        //    lines: 7,
-        //    length: 0,
-        //    width: 30,
-        //    speed: 1.7,
-        //    corners: 1.0,
-        //    trail: 100,
-        //    color: '#F58A00'
-
-
-        //};
+        vm.spinnerOptions = config.spinnerOptions;
         vm.currentView = common.getView(common.routes.home);
-   
        
-        // Bindable properties and functions are placed on vm.
+        // #region Bindable properties and functions
         vm.activate = activate;
         vm.title = 'shell';
         vm.closeErrors = closeErrors;
+        vm.visible = false;
+        //#endregion
+
+        activate();
+
+        //#region Internal Methods 
         function toggleSpinner(on) {
              vm.isBusy = on;
         }
-
         function showErrors(on) {
              vm.showErrors = on;
+        }
+        function showView(on) {
+            vm.visible= on;
+        }
+        function showBusy(on) {
+            toggleSpinner(on);
+            showView(!on);
         }
         function closeErrors() {
             common.$broadcast(events.showErrors, { show: false, errors: null });
         };
-        function showView(view) {
+        function loadView(view) {
             vm.currentView = null;
             vm.currentView = common.getView(view);
         }
         function activate() {
+            common.activateController([], controllerId);
         }
-
         $rootScope.$on(events.spinnerToggle,
             function (data, args) {
                 toggleSpinner(args.show);
             }
         );
         $rootScope.$on(events.showView, function (data, args) {
-            showView(args.view);
+            showView(args.show);
         });
-        $rootScope.$on(events.showErrors, function (data, args) {
-            vm.errors = args.errors;
-            showErrors(args.show);
+        $rootScope.$on(events.loadView, function (data, args) {
+            loadView(args.view);
+        });
+        $rootScope.$on(events.showBusy, function (data, args) {
+            showBusy(args.busy);
         });
         $rootScope.$on(events.controllerActivateSuccess,
          function (data, args) {
              logSuccess('Loaded ' + args.controllerId, null, true);
          });
+        //#endregion
     }
 })();

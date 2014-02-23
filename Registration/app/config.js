@@ -6,17 +6,49 @@ to the application as a whole. Logging, toastr settings, events, etc
     'use strict';
     var id = 'config';
     var app = angular.module('app');
-
+    var spinnerOptions = {
+        radius: 40,
+        lines: 7,
+        length: 0,
+        width: 30,
+        speed: 1.7,
+        corners: 1.0,
+        trail: 100,
+        color: '#F58A00',
+        top: window.outerHeight / 4,
+        left: 'auto'
+    };
+    function toastrOptions() {
+        return {
+            closeButton: false,
+            debug: false,
+            positionClass: "toast-top-right",
+            onclick: null,
+            showDuration: 300,
+            hideDuration: 1000,
+            timeOut: 5000,
+            extendedTimeOut: 1000,
+            showEasing: "swing",
+            hideEasing: "linear",
+            showMethod: "fadeIn",
+            hideMethod: "fadeOut"
+        };
+    };
 
     var events = {
         showErrors: 'showErrors',
+        loadView:'loadView',
         showView: 'showView',
+        showBusy:'showBusy',
         controllerActivateSuccess: 'controllerActivateSuccess',
         spinnerToggle: 'spinnerToggle'
+
     };
     var config = {
         events: events,
-        appErrorPrefix: '[Application Error] - '
+        appErrorPrefix: '[Application Error] - ',
+        toastrOptions: toastrOptions,
+        spinnerOptions:spinnerOptions
 
     };
 

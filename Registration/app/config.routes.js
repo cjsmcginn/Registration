@@ -67,11 +67,17 @@
 
                 url: '/states',
                 config: {
-                    title: 'states',
-                    controller: 'profile'
+                    title: 'states'
 
                 }
-            }
+            },
+             {
+
+                 url: '/logout',
+                 config: {
+                     title: 'logout'
+                 }
+             }
         ];
     };
 

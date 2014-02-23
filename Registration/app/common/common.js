@@ -30,7 +30,7 @@ this will also share the configuraion with the rest of the application
         function $broadcast() {
             //we dont want to broadcast events that are not defined
             if (!arguments || !arguments[0])
-                logger.logWarning("An attempt to broadcast an undefeined evenrt was made",null,null,true);
+                logger.logWarning("An attempt to broadcast an undefeined event was made",null,null,true);
             return $rootScope.$broadcast.apply($rootScope, arguments);
         }
 
@@ -68,7 +68,8 @@ this will also share the configuraion with the rest of the application
                 account: '/account',
                 login: '/login',
                 profile: '/profile',
-                states:'/states'
+                states: '/states',
+                logout:'/logout'
             },
             getView: getView,
             getRoute: getRoute,

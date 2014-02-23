@@ -1,32 +1,46 @@
 ﻿(function () {
     'use strict';
 
-    // Controller name is handy for logging
     var controllerId = 'register';
-
-    // Define the controller on the module.
-    // Inject the dependencies. 
-    // Point to the controller definition function.
     angular.module('app').controller(controllerId,
-        ['$scope','datacontext','common','config', register]);
+        ['$scope', 'datacontext', 'common', 'config','logger', register]);
 
-    function register($scope,datacontext,common,config) {
-        // Using 'Controller As' syntax, so we assign this to the vm variable (for viewmodel).
+    function register($scope, datacontext, common, config,logger,form) {
         var vm = this;
 
-        // Bindable properties and functions are placed on vm.
+        // #region Bindable properties and functions
         vm.activate = activate;
         vm.title = 'register';
         vm.save = save;
+        //#endregion
+        activate();
+
+        //#region Internal Methods        
+        
         function activate() {
+            common.activateController([], controllerId);
         }
         function save() {
-            datacontext.register(vm).catch(function (response) {
+            if (!$scope.registrationForm.$valid) {
+                return;
+            };
+         
+            common.$broadcast(config.events.spinnerToggle, { show: true });
+            datacontext.register(vm).then(function (response) {
+                if (response.errors) 
+                    for (var i = 0; i < response.errors.length; i++)
+                        logger.logError(response.errors[i], null, null, true);
+                else
+                    common.$broadcast(config.events.loadView, { view: common.routes.profile });
+            })
+            .catch(function (response) {
                 common.$broadcast(config.events.showErrors, { show: true, errors: [response] });
+
+            })
+            .finally(function () {
+                common.$broadcast(config.events.spinnerToggle, { show: false });
             });
         }
-        //#region Internal Methods        
-
         //#endregion
     }
 })();

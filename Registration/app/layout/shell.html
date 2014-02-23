@@ -1,34 +1,14 @@
 ﻿<div id="shell" data-ng-controller="shell as vm">
-
-    <div class="container-fluid">
-        <div data-ng-include="vm.currentView"></div>
-        <div data-ng-show="vm.isBusy">
+        <div class="page-splash" style="width:100%" data-ng-show="vm.isBusy">
             <div data-cc-spinner="vm.spinnerOptions"></div>
         </div>
-        <div id="errors" data-ng-show="vm.showErrors">
-            <div class="modal show">
-                <div class="modal-content col-sm-8 col-sm-offset-2">
-                    <div class="modal-header">
-                        <h4 class="modal-title">Errors</h4>
-                    </div>
-                    <div class="modal-body">
-                        <div class="row" data-ng-repeat="error in vm.errors">
-                            <div class="col-sm-12">
-                                <span>{{ error }}</span>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-12">
-                                <button type="button" class="btn btn-default" data-ng-click="vm.closeErrors()">Close</button>
-                            </div>
-                        </div>
-                    </div>
+   
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-6 col-sm-8 col-xs-10 centered">
+                    <div data-ng-include="vm.currentView" data-ng-show="vm.visible"></div>
                 </div>
-
             </div>
         </div>
-    
-
     </div>
-</div>
 

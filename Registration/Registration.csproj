@@ -112,6 +112,8 @@
     <Content Include="app\profile\profile.js" />
     <Content Include="app\register\register.html" />
     <Content Include="app\register\register.js" />
+    <Content Include="app\scratch\scratch.html" />
+    <Content Include="app\scratch\scratch.js" />
     <Content Include="app\services\datacontext.js" />
     <Content Include="app\services\model.js" />
     <Content Include="app\services\model.mapper.js" />
@@ -123,6 +125,7 @@
     </Content>
     <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Content\images\favicon.jpg" />
+    <Content Include="Content\site.css" />
     <Content Include="Content\toastr.css" />
     <Content Include="Content\toastr.min.css" />
     <Content Include="index.html" />
