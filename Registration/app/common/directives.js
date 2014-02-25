@@ -5,36 +5,37 @@
     // Inject the dependencies. 
     // Point to the directive definition function.
     angular.module('app').directive('uiValidateEquals', function () {
-
+        
         return {
-            restrict: 'A',
-            require: 'ngModel',
-            link: function (scope, elm, attrs, ctrl) {
-
-
-                elm.on('blur', function (e, n) {
-                    var source = scope.$eval(attrs.uiValidateEquals);
-                    var target = ctrl.$modelValue;
-                    if (source && target) {
-                        ctrl.$setValidity('equal', source == target);
-                        var content = attrs.uiValidateEqualsError;
-                        elm.popover({
-                            placement: 'bottom',
-                            conatiner: 'body',
-                            content: content
-                        });
-                        if (ctrl.$invalid) {
-                            elm.popover('show');
-                            elm.focus();
-                        } else {
-                            elm.popover('hide');
-                        }
+            require: '?ngModel',
+            link: function (scope, elm, attr, ctrl) {
+                if (!ctrl) return;
+                attr.equals = true; // force truthy in case we are on non input element
+                var source = scope.$eval(attr.uiValidateEquals);
+                //check against source changes as well
+                
+                var validator = function () {
+                    if (attr.equals) {
+                        var valid = ctrl.$viewValue == source.$viewValue;
+                        ctrl.$setValidity('equals', valid);
+                        if (!valid)
+                            elm[0].setCustomValidity(attr.uiValidateEqualsError);
+                        else
+                            elm[0].setCustomValidity('');
+                        return ctrl.$viewValue;
                     }
-                    return undefined;
-                });
+                };
+                source.$viewChangeListeners.push(validator);
+              
+                ctrl.$formatters.push(validator);
+                ctrl.$parsers.unshift(validator);
 
+                attr.$observe('equals', function () {
+                    validator();
+                });
             }
         };
+ 
     });
     /// ng-minlength appears to have a bug in this release 
     angular.module('app').directive('uiMinlength', function () {

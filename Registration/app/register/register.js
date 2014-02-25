@@ -21,13 +21,14 @@
             common.activateController([], controllerId);
         }
         function save() {
+
             if (!$scope.registrationForm.$valid) {
                 return;
             };
          
             common.$broadcast(config.events.spinnerToggle, { show: true });
             datacontext.register(vm).then(function (response) {
-                if (response.errors) 
+                if (response.errors.length>0) 
                     for (var i = 0; i < response.errors.length; i++)
                         logger.logError(response.errors[i], null, null, true);
                 else
