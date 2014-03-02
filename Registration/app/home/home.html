@@ -1,0 +1,10 @@
+﻿<div id="home" data-ng-controller="home as vm">
+    <div data-ng-switch="vm.account.isAuthenticated">
+        <div data-ng-switch-when="true">
+            <div data-ng-include="vm.profile"></div>
+        </div>
+        <div ng-switch-default>
+            <div data-ng-include="vm.login"></div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,40 @@
+﻿<div id="login" data-ng-controller="login as vm">
+    <div class="row">
+        <div class="col-sm-12">
+            <h2>{{vm.title}}</h2>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <form class="form-horizontal" role="form">
+                <div class="form-group">
+                    <label for="username" class="col-sm-2 control-label">Username</label>
+                    <div class="col-sm-10">
+                        <input class="form-control" required id="username" data-ui-minlength="6" data-ui-maxlength="12" data-ng-model="vm.account.username" placeholder="Username">
+
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="password" class="col-sm-2 control-label">Password</label>
+                    <div class="col-sm-10">
+                        <input class="form-control" type="password" required id="password" data-ng-model="vm.account.password" placeholder="Password">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-12">
+                        <div class="row">
+                            <div class="col-sm-2 pull-right">
+                                <button class="btn btn-primary" id="login" data-ng-click="vm.doLogin()">Log In</button>
+                            </div>
+                            <div class="col-sm-2 pull-right">
+                                <button type="button" class="btn" data-ng-click="vm.register()">Register</button>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
