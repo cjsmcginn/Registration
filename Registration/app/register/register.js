@@ -27,20 +27,21 @@
             };
          
             common.$broadcast(config.events.spinnerToggle, { show: true });
-            datacontext.register(vm).then(function (response) {
-                if (response.errors.length>0) 
+            var promise = datacontext.register(vm).then(function(response) {
+                if (response.errors.length > 0)
                     for (var i = 0; i < response.errors.length; i++)
                         logger.logError(response.errors[i], null, null, true);
                 else
                     common.$broadcast(config.events.loadView, { view: common.routes.profile });
-            })
-            .catch(function (response) {
+            });
+            promise['catch'](function(response) {
                 common.$broadcast(config.events.showErrors, { show: true, errors: [response] });
 
-            })
-            .finally(function () {
+            });
+            promise['finally'](function () {
                 common.$broadcast(config.events.spinnerToggle, { show: false });
             });
+            
         }
         //#endregion
     }

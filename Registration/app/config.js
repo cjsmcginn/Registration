@@ -15,7 +15,7 @@ to the application as a whole. Logging, toastr settings, events, etc
         corners: 1.0,
         trail: 100,
         color: '#F58A00',
-        top: window.outerHeight / 4,
+        top: window.outerHeight / 5,
         left: 'auto'
     };
     function toastrOptions() {

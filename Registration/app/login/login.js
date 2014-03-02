@@ -28,17 +28,19 @@
         //#region Internal Methods        
         function doLogin() {
             common.$broadcast(config.events.spinnerToggle, { show: true });
-            
-            datacontext.login(vm).then(function(response) {
+
+            var promise = datacontext.login(vm).then(function(response) {
                 vm.account = response;
                 if (!vm.account.isAuthenticated) {
                     logger.logError('Invalid username or password', null, null, true);
                 } else
                     common.$broadcast(config.events.loadView, { view: common.routes.profile });
-                
-            }).catch(function(response) {
+
+            });
+            promise['catch'](function(response) {
                 common.$broadcast(config.events.showErrors, { show: true, errors: [response] });
-            }).finally(function() {
+            });
+            promise['finally'](function() {
                 common.$broadcast(config.events.spinnerToggle, { show: false });
             });
         }

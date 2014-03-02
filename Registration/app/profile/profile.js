@@ -23,12 +23,14 @@
         }
         function getProfile() {
             common.$broadcast(config.events.showBusy, { busy: true });
-            datacontext.getProfile().then(function (response) {
+            var promise = datacontext.getProfile().then(function(response) {
                 vm.profile = response;
-            }).catch(function (response) {
+            });
+            promise['catch'](function(response) {
                 if (response == 401)
                     common.$broadcast(config.events.loadView, { view: common.routes.login });
-            }).finally(function () {
+            });
+            promise['finally'](function () {
                 common.$broadcast(config.events.showBusy, { busy: false });
             });
         }
@@ -36,10 +38,11 @@
             getStates();
         }
         function getStates() {
-            datacontext.getStates(vm.profile.country.key).then(function (response) {
+            var promise = datacontext.getStates(vm.profile.country.key).then(function(response) {
                 vm.profile.stateProvince = null;
                 vm.profile.stateProvinces = response;
-            }).catch(function (response) {
+            });
+            promise['catch'](function (response) {
                 common.$broadcast(config.events.showErrors, { show: true, errors: [response] });
             });
         }

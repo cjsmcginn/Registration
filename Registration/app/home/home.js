@@ -25,11 +25,13 @@
         }
         function getAccount() {
             common.$broadcast(config.events.showBusy, { busy: true });
-            datacontext.getAccount().then(function (response) {
+            var promise = datacontext.getAccount().then(function(response) {
                 vm.account = response;
-            }).catch(function (response) {
+            });
+            promise['catch'](function(response) {
                 common.$broadcast(config.events.showErrors, { show: true, errors: [response] });
-            }).finally(function () {
+            });
+            promise['finally'](function () {
                 common.$broadcast(config.events.showBusy, { busy: false });
             });
         }

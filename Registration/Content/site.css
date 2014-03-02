@@ -22,3 +22,6 @@
 .spinner {
     margin: 15% auto 0 auto;
 }
+ul.nav .row{ margin: 0px;}
+.btn .glyphicon{ margin-right: 4px;}
+.page-title{text-transform:capitalize}

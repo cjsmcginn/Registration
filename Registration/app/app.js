@@ -17,8 +17,8 @@
     ]);
     
     // Execute bootstrapping code and any dependencies.
-    app.run(['$q', '$rootScope','common',
-        function ($q, $rootScope,common) {
-            console.log('running');
-        }]);
+    //app.run(['$q', '$rootScope','common',
+    //    function ($q, $rootScope,common) {
+            
+    //    }]);
 })();

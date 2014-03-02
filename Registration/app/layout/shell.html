@@ -1,14 +1,38 @@
 ﻿<div id="shell" data-ng-controller="shell as vm">
-        <div class="page-splash" style="width:100%" data-ng-show="vm.isBusy">
-            <div data-cc-spinner="vm.spinnerOptions"></div>
+    <div class="navbar navbar-inverse" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">My Application</a>
+
+            </div>
+
+            <div class="collapse navbar-collapse">
+                <ul class="nav navbar-nav">
+                    <li class="active">
+                        <a href="/">Home</a>
+                    </li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </div>
+            </div>
         </div>
-   
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-lg-6 col-sm-8 col-xs-10 centered">
-                    <div data-ng-include="vm.currentView" data-ng-show="vm.visible"></div>
-                </div>
+    <div class="page-splash" style="width:100%" data-ng-show="vm.isBusy">
+        <div data-cc-spinner="vm.spinnerOptions"></div>
+    </div>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-6 col-sm-8 col-xs-10 centered">
+                <div data-ng-include="vm.currentView" data-ng-show="vm.visible"></div>
             </div>
         </div>
     </div>
+</div>
 

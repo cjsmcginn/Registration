@@ -1,7 +1,7 @@
 ﻿<div id="login" data-ng-controller="login as vm">
     <div class="row">
         <div class="col-sm-12">
-            <h2>{{vm.title}}</h2>
+            <h2 class="page-title">{{vm.title}}</h2>
         </div>
     </div>
     <div class="row">
@@ -21,18 +21,15 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <div class="col-sm-12">
-                        <div class="row">
-                            <div class="col-sm-2 pull-right">
-                                <button class="btn btn-primary" id="login" data-ng-click="vm.doLogin()">Log In</button>
-                            </div>
-                            <div class="col-sm-2 pull-right">
-                                <button type="button" class="btn" data-ng-click="vm.register()">Register</button>
-                            </div>
-
+                    <div class="row pull-right">
+                        <div class="col-xs-5 col-sm-5">
+                            <button class="btn btn-primary" id="login" data-ng-click="vm.doLogin()">Log In</button>
+                        </div>
+                        <div class="col-xs-4 col-sm-4">
+                            <button type="button" class="btn" data-ng-click="vm.register()">Register</button>
                         </div>
                     </div>
-
+          
                 </div>
             </form>
         </div>
