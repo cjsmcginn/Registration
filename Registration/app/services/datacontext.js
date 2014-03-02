@@ -1,6 +1,7 @@
 ﻿/*
 purpose: to expose and abstract all CRUD operations that the application relies on
 to more easily adjust to changes. Any api change in terms of data should be made here.
+this also provides a way to pass in mock data if necessary, if it exposes the same prototype methods
 */
 (function () {
     'use strict';

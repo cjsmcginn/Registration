@@ -1,4 +1,9 @@
-﻿(function () {
+﻿/*
+purpose: define a mapper that can map client models to server models and visa versa, as this decouples
+small changes in server models that would typically require client code to change if there was no layer
+such as this, to handle such situations.
+*/
+(function () {
     'use strict';
 
     // Module name is handy for logging

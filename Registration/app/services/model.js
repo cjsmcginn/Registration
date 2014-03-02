@@ -1,11 +1,11 @@
 ﻿/*
-profile: define well known models to abstract client models from server models.
+purpose: define well known models to abstract client models from server models.
 These models will be used to map data that comes back from the server so there will always be well known to the client
 */
 (function () {
     'use strict';
 
-    // Module name is handy for logging
+ 
     var serviceId = 'model';
     angular.module('app').factory(serviceId,
        ['$rootScope',
@@ -30,14 +30,7 @@ These models will be used to map data that comes back from the server so there w
             };
             return result;
         };
-        function Module() {
-            var result = {
-                id: '',
-                title: '',
-                index: 0
-            };
-            return result;
-        };
+
         function Account() {
             var result = {
                 username: '',
@@ -46,13 +39,7 @@ These models will be used to map data that comes back from the server so there w
             };
             return result;
         };
-        function Secure() {
-            var result = {
-                secretMessage: ''
-            };
-            return result;
 
-        }
 
     };
 

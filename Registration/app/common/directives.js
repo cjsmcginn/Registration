@@ -1,9 +1,6 @@
 ﻿(function () {
     'use strict';
 
-    // Define the directive on the module.
-    // Inject the dependencies. 
-    // Point to the directive definition function.
     angular.module('app').directive('uiValidateEquals', function () {
         
         return {
@@ -100,28 +97,7 @@
             }
         };
     });
-    angular.module('app').directive('uiNavlist', function () {
-        var element = null;
-        return {
-            restrict: 'A',
-            transclude: true,
-            link: function (scope, elm, attrs) {
-                element = elm;
 
-                //if (scope.$last) {
-                //    //console.log(angular.element(elm).find('li'));
-                //    elm.on('click', function (e, a) {
-                //        angular.element(e.currentTarget).find('li').addClass(active);
-                //        console.log(e);
-                //        console.log(a);
-                //    });
-                //}
-
-            }
-        };
-
-
-    });
 
     angular.module('app').directive('ccSpinner', ['$window', function ($window) {
         // Description:

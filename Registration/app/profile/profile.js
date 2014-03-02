@@ -1,4 +1,7 @@
-﻿(function () {
+﻿/*
+purpose: serves as the controller for profile modifications
+*/
+(function () {
     'use strict';
     var controllerId = 'profile';
 

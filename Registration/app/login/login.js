@@ -1,20 +1,18 @@
-﻿(function () {
+﻿/*
+purpose: serves as the controller for logging in users, or providing a means to navigate to registration
+*/
+(function () {
     'use strict';
 
-    // Controller name is handy for logging
     var controllerId = 'login';
-
-    // Define the controller on the module.
-    // Inject the dependencies. 
-    // Point to the controller definition function.
     angular.module('app').controller(controllerId,
         ['$rootScope','common','config','datacontext','model','logger', login]);
 
     function login($rootScope,common,config,datacontext,model,logger) {
-        // Using 'Controller As' syntax, so we assign this to the vm variable (for viewmodel).
+
         var vm = this;
 
-        // Bindable properties and functions are placed on vm.
+        // #region Bindable properties and functions
         vm.activate = activate;
         vm.title = 'login';
         vm.account = new model.Account();
@@ -24,7 +22,7 @@
         function activate() {
             common.activateController([], controllerId);
         }
-
+        // #endregion
         //#region Internal Methods        
         function doLogin() {
             common.$broadcast(config.events.spinnerToggle, { show: true });

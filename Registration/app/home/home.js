@@ -1,4 +1,7 @@
-﻿(function () {
+﻿/*
+purpose: serves as the controller for the default landing space of users, responsible for deciding what is displayed when they hit the site.
+*/
+(function () {
     'use strict';
     var controllerId = 'home';
 

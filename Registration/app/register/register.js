@@ -1,4 +1,7 @@
-﻿(function () {
+﻿/*
+purpose: serves as the controller for registration of new accounts
+*/
+(function () {
     'use strict';
 
     var controllerId = 'register';

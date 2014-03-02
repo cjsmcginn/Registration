@@ -1,4 +1,8 @@
-﻿(function () {
+﻿/*
+purpose: This centralizes all routes in the application. Any routing requests are made here, which provides
+a single point for configuring routes that the application should adhere to, abstracting physical and logical routes.
+*/
+(function () {
     'use strict';
 
 
