@@ -7,6 +7,9 @@ using Registration.Core.Domain;
 
 namespace Registration.Core.Services
 {
+    /// <summary>
+    /// Provide methods to assist with operations on Accounts
+    /// </summary>
     public interface IAccountService
     {
         Account GetAccount(string username, string password);

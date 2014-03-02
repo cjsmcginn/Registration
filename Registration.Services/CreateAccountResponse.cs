@@ -8,6 +8,10 @@ using Registration.Core.Services;
 
 namespace Registration.Services
 {
+    /// <summary>
+    /// Concrete Implementation of ICreateAccountResponse
+    /// </summary>
+    /// <see cref="ICreateAccountResponse"/>
     public class CreateAccountResponse : ICreateAccountResponse
     {
         public bool Success { get; set; }

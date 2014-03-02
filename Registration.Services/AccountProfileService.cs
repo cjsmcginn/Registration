@@ -9,7 +9,11 @@ using Registration.Core.Services;
 
 namespace Registration.Services
 {
-
+    /// <summary>
+    /// AccountProfileService prescribes to the single responsibility principle and serves as what should be the 
+    /// single place where operations involving Account Profiles are performed.
+    /// This class provides CRUD operations on Account Profiles, and should be the only place where this is performed.
+    /// </summary>
     public class AccountProfileService : IAccountProfileService
     {
         

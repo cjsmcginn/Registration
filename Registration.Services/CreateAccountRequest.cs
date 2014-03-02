@@ -7,6 +7,10 @@ using Registration.Core.Services;
 
 namespace Registration.Services
 {
+    /// <summary>
+    /// Concrete Implementation of ICreateAccountRequest
+    /// </summary>
+    /// <see cref="ICreateAccountRequest"/>
     public class CreateAccountRequest : ICreateAccountRequest
     {
 

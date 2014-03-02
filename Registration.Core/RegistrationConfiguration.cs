@@ -7,6 +7,11 @@ using System.Threading.Tasks;
 
 namespace Registration.Core
 {
+    /// <summary>
+    /// RegistrationConfiguration provides a Configuration Section that can be used in .config files. This configuration deals
+    /// mainly with the way accounts are handled, password lengths, cookie expirations, etc... it is patterened around the 
+    /// ASP membership provider.
+    /// </summary>
     public class RegistrationConfiguration : ConfigurationSection
     {
 

@@ -11,16 +11,25 @@ using Registration.Models;
 
 namespace Registration.Modules
 {
-    public class ProfileModule:NancyModule
+    public class ProfileModule:NancyModule, IProfileModule
     {
         private readonly IAccountService _accountService;
         private readonly IAccountProfileService _accountProfileService;
+        /// <summary>
+        /// Secure module that handles requests to save a users profile
+        /// The services are provided provided by IOC container (see the bootstrapper)
+        /// </summary>
+        /// <param name="accountService"></param>
+        /// <param name="accountProfileService"></param>
         public ProfileModule(IAccountService accountService
             , IAccountProfileService accountProfileService)
         {
             _accountService = accountService;
             _accountProfileService = accountProfileService;
+
+            //Calling this built in helper will check that the current User Identity is set before methods can be called.
             this.RequiresAuthentication();
+            #region Handler Methods
             Get["/profile"] = p =>
             {
                 var result = GetProfileViewModel();
@@ -37,9 +46,10 @@ namespace Registration.Modules
                 SaveProfile(model);
                 return model;
             };
+            #endregion
         }
 
-        protected virtual void SaveProfile(ProfileViewModel model)
+        public virtual void SaveProfile(ProfileViewModel model)
         {
             var account = _accountService.GetAccountByUsername(this.Context.CurrentUser.UserName);
             var profile = new AccountProfile
@@ -55,7 +65,8 @@ namespace Registration.Modules
             _accountProfileService.SaveAccountProfile(account, profile);
 
         }
-        protected virtual ProfileViewModel GetProfileViewModel()
+
+        public virtual ProfileViewModel GetProfileViewModel()
         {
             var result = new ProfileViewModel();
             var account = _accountService.GetAccountByUsername(this.Context.CurrentUser.UserName);
@@ -87,7 +98,7 @@ namespace Registration.Modules
             return result;
         }
 
-        protected virtual List<KeyValuePair<Guid, string>> GetStateProvincesForCountry(Guid countryId)
+        public virtual List<KeyValuePair<Guid, string>> GetStateProvincesForCountry(Guid countryId)
         {
             var result = new List<KeyValuePair<Guid, string>>();
             var country = _accountProfileService.GetCountries()

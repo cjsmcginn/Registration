@@ -5,6 +5,9 @@ using System.Web;
 
 namespace Registration.Models
 {
+    /// <summary>
+    /// This view model represents the users account on the client data tier.
+    /// </summary>
     public class AccountViewModel
     {
         public class AccountModel
@@ -24,6 +27,9 @@ namespace Registration.Models
             get { return _errors ?? (_errors = new List<string>()); }
             set { _errors = value; }
         }
+        /// <summary>
+        /// When a user is authenticated, this should be true
+        /// </summary>
         public bool IsAuthenticated { get; set; }
         private List<string> _errors;
     }

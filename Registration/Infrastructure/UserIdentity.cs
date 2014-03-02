@@ -6,6 +6,11 @@ using Nancy.Security;
 
 namespace Registration.Infrastructure
 {
+    /// <summary>
+    /// A custom implementation of a nancy user identity. This allows us to use 
+    /// built in helpers that the library provides. Nancy is trained to recognize instances
+    /// of IUserIdentity
+    /// </summary>
     public class UserIdentity : IUserIdentity
     {
         private readonly string _username;

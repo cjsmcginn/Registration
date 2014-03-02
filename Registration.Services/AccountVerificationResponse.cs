@@ -8,6 +8,10 @@ using Registration.Core.Services;
 
 namespace Registration.Services
 {
+    /// <summary>
+    /// Concrete Implementation of IAccountVerificationResponse
+    /// </summary>
+    /// <see cref="IAccountVerificationResponse"/>
     public class AccountVerificationResponse : IAccountVerificationResponse
     {
         public bool UsernameDoesNotExist { get; set; }

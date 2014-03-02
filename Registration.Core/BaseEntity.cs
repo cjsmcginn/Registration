@@ -6,6 +6,10 @@ using System.Threading.Tasks;
 
 namespace Registration.Core
 {
+    /// <summary>
+    /// BaseEntity is the base class for entites that provided some common features of persisted items.
+    /// Such common features include an Key, Equality comparison, Hashing, collection access.
+    /// </summary>
     public abstract partial class BaseEntity
     {
         /// <summary>

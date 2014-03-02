@@ -7,6 +7,11 @@ using Registration.Core.Services;
 
 namespace Registration.Services
 {
+    /// <summary>
+    /// AccountService prescribes to the single responsibility principle and serves as what should be the 
+    /// single place where operations involving Accounts are performed.
+    /// This class provides CRUD operations on Accounts, and should be the only place where this is performed.
+    /// </summary>
     public class AccountService : IAccountService
     {
         static readonly RegistrationConfiguration RegistrationConfiguration = System.Configuration.ConfigurationManager.GetSection("registrationConfiguration") as RegistrationConfiguration;

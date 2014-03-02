@@ -5,6 +5,9 @@ using System.Text;
 
 namespace Registration.Core.Extensions
 {
+ /// <summary>
+ /// Provides common static helpers for encrypting and decrypting strings
+ /// </summary>
     public static class EncryptionExtensions
     {
         static readonly RegistrationConfiguration RegistrationConfiguration = System.Configuration.ConfigurationManager.GetSection("registrationConfiguration") as RegistrationConfiguration;

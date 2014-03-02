@@ -16,11 +16,15 @@ namespace Registration.Modules
     public class AccountModule : NancyModule, IAccountModule
     {
         private readonly IAccountService _accountService;
-
+        /// <summary>
+        /// This module handles requests that allow a user to register, login and logout.
+        /// The services are provided provided by IOC container (see the bootstrapper)
+        /// </summary>
+        /// <param name="accountService"></param>
         public AccountModule(IAccountService accountService)
         {
             _accountService = accountService;
-
+            #region Handler Methods
             Get["/account"] = p =>
             {
                 var result = new AccountViewModel
@@ -63,7 +67,15 @@ namespace Registration.Modules
                 Logout();
                 return HttpStatusCode.OK;
             };
+            #endregion
         }
+
+        #region IAccountModule Implementation
+        /// <summary>
+        /// Registers a new account, sets authenticated property to true if successful.
+        /// If registration is success SetUser will be called to set the authentication token.
+        /// </summary>
+        /// <param name="model"></param>
         public void RegisterAccount(AccountViewModel model)
         {
             var request = new CreateAccountRequest
@@ -94,6 +106,12 @@ namespace Registration.Modules
             }
 
         }
+        /// <summary>
+        /// Using bound account view model, attempt to login 
+        /// and set authenticated property appropritely.
+        /// If login is success SetUser will be called to set the authentication token.
+        /// </summary>
+        /// <param name="model"></param>
         public void Login(AccountViewModel model)
         {
             var request = new AccountVerificationRequest
@@ -124,6 +142,20 @@ namespace Registration.Modules
 
 
         }
+        /// <summary>
+        /// Unsets the authentication token
+        /// </summary>
+        public void Logout()
+        {
+            this.After += ctx => ctx.LogOut();
+        }
+        #endregion
+
+        #region Class Methods
+        /// <summary>
+        /// Sets the authentication token, bypass provided for testability.
+        /// </summary>
+        /// <param name="account"></param>
         private void SetUser(Account account)
         {
             //facilitate testing, should never be null in hosted environment 
@@ -131,13 +163,9 @@ namespace Registration.Modules
             {
 
                 this.After += ctx => ctx.SetAuthenticationToken(account);
-                  
+
             }
         }
-        public void Logout()
-        {
-
-            this.After += ctx => ctx.LogOut();
-        }
+        #endregion
     }
 }

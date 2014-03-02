@@ -11,28 +11,38 @@ using Registration.Infrastructure;
 
 namespace Registration.Extensions
 {
+    /// <summary>
+    /// Helper classes for Nancy
+    /// Contains methods to assist with authentication.
+    /// </summary>
     public static class NancyExtensions
     {
-        static RegistrationConfiguration _registrationConfiguration = System.Configuration.ConfigurationManager.GetSection("registrationConfiguration") as RegistrationConfiguration;
+        static readonly RegistrationConfiguration RegistrationConfiguration = System.Configuration.ConfigurationManager.GetSection("registrationConfiguration") as RegistrationConfiguration;
         /// <summary>
-        /// Given a context assuming the auth cookie is set, this will add our user identity
+        /// Given a context assuming the auth cookie is set, this will add our user identity.
+        /// This method will also handle decrypting and interrogating the token
         /// </summary>
         /// <param name="context"></param>
         public static void Authorize(this NancyContext context)
         {
-            if (!context.Request.Cookies.ContainsKey(_registrationConfiguration.AuthenticationCookieName)) return;
-            var encryptedToken = HttpUtility.UrlDecode(context.Request.Cookies[_registrationConfiguration.AuthenticationCookieName]).DecryptText();
+            if (!context.Request.Cookies.ContainsKey(RegistrationConfiguration.AuthenticationCookieName)) return;
+            var encryptedToken = HttpUtility.UrlDecode(context.Request.Cookies[RegistrationConfiguration.AuthenticationCookieName]).DecryptText();
             var token = JsonConvert.DeserializeObject<AuthenticationToken>(encryptedToken);
             if (token != null && token.ExpiresOnUtc >= System.DateTime.UtcNow)
                 context.CurrentUser = new UserIdentity(token.UserName);
         }
-
+        /// <summary>
+        /// Sets a cookie representing an Authentication token object. Depending on the Registration Configuration,
+        /// this method will set the expiration accordingly
+        /// </summary>
+        /// <param name="context"></param>
+        /// <param name="account"></param>
         public static void SetAuthenticationToken(this NancyContext context, Account account)
         {
 
-            var expiration = _registrationConfiguration.CreatePersistantCookie
+            var expiration = RegistrationConfiguration.CreatePersistantCookie
                 ? System.DateTime.UtcNow.AddYears(1)
-                : System.DateTime.UtcNow.AddMinutes(_registrationConfiguration.ExpirationMinutes);
+                : System.DateTime.UtcNow.AddMinutes(RegistrationConfiguration.ExpirationMinutes);
             var token = new AuthenticationToken
             {
                 UserName = account.Username,
@@ -42,15 +52,18 @@ namespace Registration.Extensions
             var serialized = JsonConvert.SerializeObject(token);
             var encrypted = serialized.EncryptText();
 
-            var cookie = new NancyCookie(_registrationConfiguration.AuthenticationCookieName, encrypted);
+            var cookie = new NancyCookie(RegistrationConfiguration.AuthenticationCookieName, encrypted);
             context.Response.WithCookie(cookie);
             
         }
-
+        /// <summary>
+        /// Logs out the user by expiring authentication token cookie
+        /// </summary>
+        /// <param name="context"></param>
         public static void LogOut(this NancyContext context)
         {
      
-            var cookie = new NancyCookie(_registrationConfiguration.AuthenticationCookieName, null);
+            var cookie = new NancyCookie(RegistrationConfiguration.AuthenticationCookieName, null);
             cookie.Expires = System.DateTime.MinValue;
             context.Response.WithCookie(cookie);
 

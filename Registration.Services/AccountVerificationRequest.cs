@@ -7,6 +7,10 @@ using Registration.Core.Services;
 
 namespace Registration.Services
 {
+    /// <summary>
+    /// Concrete implementation of IAccountVerificationRequest
+    /// </summary>
+    /// <see cref="IAccountVerificationRequest"/>
     public class AccountVerificationRequest : IAccountVerificationRequest
     {
         public string Username { get; set; }

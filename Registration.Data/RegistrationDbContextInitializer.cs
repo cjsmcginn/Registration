@@ -8,6 +8,10 @@ using Registration.Core.Domain;
 
 namespace Registration.Data
 {
+   /// <summary>
+   /// This contrext initializer is provider to seed new databases the first time the application is run in a new
+   /// environment, and also provides support for unique index creation abscent from code first entity mapping attributes.
+   /// </summary>
     public class RegistrationDbContextInitializer : CreateDatabaseIfNotExists<RegistrationDbContext>
     {
      

@@ -469,10 +469,10 @@
     <Compile Include="Infrastructure\UserIdentity.cs" />
     <Compile Include="Models\AccountViewModel.cs" />
     <Compile Include="Models\ProfileViewModel.cs" />
-    <Compile Include="Models\SecureModel.cs" />
     <Compile Include="Modules\AccountModule.cs" />
     <Compile Include="Modules\HomeModule.cs" />
     <Compile Include="Modules\IAccountModule.cs" />
+    <Compile Include="Modules\IProfileModule.cs" />
     <Compile Include="Modules\ProfileModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />

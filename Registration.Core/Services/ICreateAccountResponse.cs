@@ -7,6 +7,11 @@ using Registration.Core.Domain;
 
 namespace Registration.Core.Services
 {
+    /// <summary>
+    /// The ICreateAccountResponse is the counterpart to the ICreateAccountRequest.This interface is use to provide a generalized structure that can be used
+    /// by different providers to create accounts. This encapsulates generic account creation properties from 
+    /// the underlying strategy to create accounts. Provider specific properties can be included in implementations of this interface.
+    /// </summary>
     public interface ICreateAccountResponse
     {
         bool Success { get; set; }

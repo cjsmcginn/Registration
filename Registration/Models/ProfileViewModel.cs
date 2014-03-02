@@ -6,6 +6,9 @@ using Registration.Core.Domain;
 
 namespace Registration.Models
 {
+    /// <summary>
+    /// This object represents the users profile on the client data tier.
+    /// </summary>
     public class ProfileViewModel
     {
         public Guid AccountId { get; set; }
