@@ -13,9 +13,7 @@ These models will be used to map data that comes back from the server so there w
     function model($rootScope) {
         var service = {
             Account: Account,
-            Module: Module,
-            Profile: Profile,
-            Secure:Secure
+            Profile: Profile
         };
         return service;
 
